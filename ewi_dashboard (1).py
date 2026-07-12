@@ -23,7 +23,7 @@ import os
 # ── CONFIG ──────────────────────────────────────────────────────────────────
 # If you bundle your data file in the same repo/folder as this script, put its
 # name here so it loads automatically with no upload needed.
-DEFAULT_FILE_PATH = "EWI_INDEX_ONLY_CONSERVATIVE.xlsx"
+DEFAULT_FILE_PATH = "EWI_INDEX_ONLY_CONSERVATIVE (1).xlsx"
 
 st.set_page_config(
     page_title="EWI Hyperinflation Monitor",
