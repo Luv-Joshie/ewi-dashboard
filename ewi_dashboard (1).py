@@ -23,7 +23,7 @@ import os
 # ── CONFIG ──────────────────────────────────────────────────────────────────
 # If you bundle your data file in the same repo/folder as this script, put its
 # name here so it loads automatically with no upload needed.
-DEFAULT_FILE_PATH = "EWI_INDEX_ONLY_CONSERVATIVE (1).xlsx"
+DEFAULT_FILE_PATH = "EWI_INDEX_ONLY_CONSERVATIVE.xlsx"
 
 st.set_page_config(
     page_title="EWI Hyperinflation Monitor",
@@ -112,18 +112,16 @@ with st.sidebar:
         unsafe_allow_html=True,
     )
     st.markdown("---")
-    uploaded = st.file_uploader("Upload EWI data (.xlsx or .csv)", type=["xlsx", "xls", "csv"])
 
-data_source = uploaded if uploaded is not None else (
-    DEFAULT_FILE_PATH if os.path.exists(DEFAULT_FILE_PATH) else None
-)
-
-if data_source is None:
-    st.info("👋 Upload your EWI data file (.xlsx or .csv) using the sidebar to get started.")
+if not os.path.exists(DEFAULT_FILE_PATH):
+    st.error(
+        f"⚠️ Data file `{DEFAULT_FILE_PATH}` not found in the app folder. "
+        "Make sure it's committed to the GitHub repo alongside ewi_dashboard.py."
+    )
     st.stop()
 
 try:
-    df = load_data(data_source)
+    df = load_data(DEFAULT_FILE_PATH)
 except Exception as e:
     st.error(f"⚠️ Couldn't read the data file: {e}")
     st.stop()
